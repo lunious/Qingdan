@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="viewpage_main" type="id">viewpage_main</item>
+    <item name="checkedTextView_home_list" type="id" />
+    <item name="checkedTextView_home_category" type="id" />
+    <item name="checkedTextView_home_mine" type="id" />
+</resources>

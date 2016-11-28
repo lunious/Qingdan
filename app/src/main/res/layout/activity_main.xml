@@ -1,17 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="lunioussky.qingdan.MainActivity">
+    android:orientation="vertical"
+    tools:context="lunioussky.qingdan.gui.activity.MainActivity">
 
-    <TextView
+    <android.support.v4.view.ViewPager
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@id/viewpage_main" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#ff898989" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_tabs_height"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+            <CheckedTextView
+                android:id="@id/checkedTextView_home_list"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/selector_home_list_tab"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+            <CheckedTextView
+                android:id="@id/checkedTextView_home_category"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/selector_home_category_tab"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+            <CheckedTextView
+                android:id="@id/checkedTextView_home_mine"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/selector_home_mine_tab"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
