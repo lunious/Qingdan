@@ -5,4 +5,5 @@ package lunioussky.qingdan.utils.http;
  */
 
 public class RequestBody {
+
 }

@@ -29,7 +29,10 @@ public class Headers {
             namesAndValues.add(value);
             return this;
         }
-
+        public Builder addHeaders(Headers headers){
+            namesAndValues.addAll(headers.namesAndValues);
+            return this;
+        }
         public Headers build(){
             return new Headers(this);
         }
