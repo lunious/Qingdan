@@ -24,9 +24,10 @@ public class Headers {
             namesAndValues = new ArrayList<>();
         }
 
-        public void addHeader(String name, String value){
+        public Builder addHeader(String name, String value){
             namesAndValues.add(name);
             namesAndValues.add(value);
+            return this;
         }
 
         public Headers build(){
