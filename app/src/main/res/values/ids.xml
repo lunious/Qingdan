@@ -13,4 +13,5 @@
     <item name="textView_title" type="id" />
     <item name="img_title_right" type="id" />
     <item name="viewPager_main_fragment" type="id" />
+    <item name="imageView_subview_main_slide_page" type="id" />
 </resources>
