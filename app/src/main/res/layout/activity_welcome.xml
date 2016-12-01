@@ -8,5 +8,4 @@
         android:layout_height="match_parent"
         android:src="@drawable/startpage_background_compressed"
         android:scaleType="centerCrop"/>
-
 </LinearLayout>

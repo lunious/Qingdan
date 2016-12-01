@@ -14,8 +14,9 @@ import android.view.ViewGroup;
 public abstract class BaseFragment extends Fragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
         return inflater.inflate(getContentViewResId(),null);
     }
+
     protected abstract int getContentViewResId();
 }

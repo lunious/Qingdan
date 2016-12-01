@@ -4,4 +4,13 @@
     <item name="checkedTextView_home_list" type="id" />
     <item name="checkedTextView_home_category" type="id" />
     <item name="checkedTextView_home_mine" type="id" />
+    <item name="viewpager_main" type="id" />
+    <item name="tabLayout_main" type="id" />
+    <item name="viewPager_main_list_slide" type="id" />
+    <item name="linearLayout_pager_indicator" type="id" />
+    <item name="rela_title" type="id" />
+    <item name="img_title_left" type="id" />
+    <item name="textView_title" type="id" />
+    <item name="img_title_right" type="id" />
+    <item name="viewPager_main_fragment" type="id" />
 </resources>

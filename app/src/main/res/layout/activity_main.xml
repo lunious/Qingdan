@@ -5,24 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="lunioussky.qingdan.gui.activity.MainActivity">
+    tools:context=".gui.activity.MainActivity">
 
     <android.support.v4.view.ViewPager
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:id="@id/viewpage_main" />
-
+        android:id="@id/viewpager_main"
+        />
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#ff898989" />
-
+        android:background="#ff898989"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_tabs_height"
-        android:orientation="horizontal">
-
+        android:orientation="horizontal"
+        >
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -32,9 +31,9 @@
                 android:id="@id/checkedTextView_home_list"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/selector_home_list_tab"/>
+                android:background="@drawable/selector_home_list_tab"
+                />
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -44,9 +43,9 @@
                 android:id="@id/checkedTextView_home_category"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/selector_home_category_tab"/>
+                android:background="@drawable/selector_home_category_tab"
+                />
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -56,9 +55,9 @@
                 android:id="@id/checkedTextView_home_mine"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/selector_home_mine_tab"/>
+                android:background="@drawable/selector_home_mine_tab"
+                />
         </LinearLayout>
-
     </LinearLayout>
 
 </LinearLayout>

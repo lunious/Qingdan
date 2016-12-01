@@ -8,7 +8,7 @@ import android.widget.TextView;
  * Created by Administrator on 2016/11/28.
  */
 
-public class GuideActivity extends Activity {
+public class GuideActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -9,22 +9,18 @@ import java.util.List;
 
 public class Headers {
     private List<String> namesAndValues;
-
-    private Headers(Builder builder) {
-        this.namesAndValues = namesAndValues;
+    private Headers(Builder builder){
+        this.namesAndValues = builder.namesAndValues;
     }
-
     public List<String> getNamesAndValues() {
         return namesAndValues;
     }
-
     public static class Builder{
         private List<String> namesAndValues;
-        public Builder() {
+        public Builder(){
             namesAndValues = new ArrayList<>();
         }
-
-        public Builder addHeader(String name, String value){
+        public Builder addHeader(String name,String value){
             namesAndValues.add(name);
             namesAndValues.add(value);
             return this;

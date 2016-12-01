@@ -18,26 +18,24 @@ public abstract class BaseActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         //设置为竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        //为Activity设置视图
+        //为Activity绑定xml视图
         setContentView(getContentViewResId());
-        //初始化控件
-        initViews();
-        //初始化数据
-        initDatas();
+
+        initViews(); //初始化控件
+        initDatas();//初始化数据
     }
 
     protected abstract void initDatas();
 
     /**
      * 初始化控件
-     * */
+     */
     protected abstract void initViews();
-
     /**
-         * 提供Activity要绑定的xml资源id
-         * */
+     * 提供Activity要绑定的xml资源id
+     * @return
+     */
     protected abstract int getContentViewResId();
-
     /**
      * 不用强转的findviewbyid
      */
