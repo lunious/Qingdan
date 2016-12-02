@@ -48,6 +48,7 @@ public class MainFragment extends BaseFragment implements MainView {
 
         pagerDotIndicator = new PagerDotIndicator(getActivity(),mainSlideViewPager,mainIndicatorContainer);
 
+        //将TabLayout关联上ViewPager
         tabLayout = (TabLayout) getView().findViewById(R.id.tabLayout_main);
         mainListFragmentViewPager = (ViewPager) getView().findViewById(R.id.viewPager_main_fragment);
         tabLayout.setupWithViewPager(mainListFragmentViewPager);
