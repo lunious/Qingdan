@@ -47,17 +47,17 @@ public class MainSlidePagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View view = views.get(position);
+        View view = views.get(position% views.size());
         SimpleDraweeView imageView = (SimpleDraweeView) view.findViewById(R.id.imageView_subview_main_slide_page);
         //使用fresco加载网络图片
-        imageView.setImageURI(datas.get(position).getFeaturedImageUrl());
+        imageView.setImageURI(datas.get(position% views.size()).getFeaturedImageUrl());
         container.addView(view);
         return view;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        View view = views.get(position);
+        View view = views.get(position% views.size());
         container.removeView(view);
     }
 }
