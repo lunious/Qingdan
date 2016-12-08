@@ -1,8 +1,9 @@
-package lunioussky.qingdan.mvp.presenter;
+package lunioussky.qingdan.mvp.presenter.impl;
 
 import lunioussky.qingdan.entity.ResponseBatching;
 import lunioussky.qingdan.mvp.model.MainModel;
-import lunioussky.qingdan.mvp.model.MainModelImpl;
+import lunioussky.qingdan.mvp.model.impl.MainModelImpl;
+import lunioussky.qingdan.mvp.presenter.MainPresenter;
 import lunioussky.qingdan.mvp.view.MainView;
 
 /**

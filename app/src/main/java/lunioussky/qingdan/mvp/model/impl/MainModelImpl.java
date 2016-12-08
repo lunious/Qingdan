@@ -1,10 +1,11 @@
-package lunioussky.qingdan.mvp.model;
+package lunioussky.qingdan.mvp.model.impl;
 
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 
 import lunioussky.qingdan.entity.ResponseBatching;
+import lunioussky.qingdan.mvp.model.MainModel;
 import lunioussky.qingdan.utils.http.FormBody;
 import lunioussky.qingdan.utils.http.HttpUtils;
 import lunioussky.qingdan.utils.http.Request;

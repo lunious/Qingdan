@@ -20,7 +20,7 @@ public class PagerDotIndicator {
     private LayoutInflater inflater;
     private int normalDotRes;
     private int selectedDotRes;
-    public PagerDotIndicator(Context context, ViewPager viewPager, LinearLayout indicatorContainer) {
+    public PagerDotIndicator(Context context, ViewPager viewPager, final LinearLayout indicatorContainer) {
         this.viewPager = viewPager;
         this.indicatorContainer = indicatorContainer;
         this.inflater = LayoutInflater.from(context);
@@ -30,10 +30,10 @@ public class PagerDotIndicator {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                                for (int i = 0; i < PagerDotIndicator.this.indicatorContainer.getChildCount(); i++) {
+                                for (int i = 0; i < indicatorContainer.getChildCount(); i++) {
                     ImageView imageView =
                             (ImageView) PagerDotIndicator.this.indicatorContainer.getChildAt(i).findViewById(R.id.imageView_indicator_dot);
-                    if (position == i){
+                    if (position % indicatorContainer.getChildCount() == i){
                         imageView.setImageResource(selectedDotRes);
                     }else{
                         imageView.setImageResource(normalDotRes);

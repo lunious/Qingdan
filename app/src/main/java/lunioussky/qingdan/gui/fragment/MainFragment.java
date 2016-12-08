@@ -15,7 +15,7 @@ import lunioussky.qingdan.gui.adapter.MainSlidePagerAdapter;
 import lunioussky.qingdan.gui.adapter.MainTabFragmentPagerAdapter;
 import lunioussky.qingdan.gui.widget.PagerDotIndicator;
 import lunioussky.qingdan.mvp.presenter.MainPresenter;
-import lunioussky.qingdan.mvp.presenter.MainPresenterImpl;
+import lunioussky.qingdan.mvp.presenter.impl.MainPresenterImpl;
 import lunioussky.qingdan.mvp.view.MainView;
 
 /**
