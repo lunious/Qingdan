@@ -15,4 +15,5 @@
     <item name="viewPager_main_fragment" type="id" />
     <item name="imageView_subview_main_slide_page" type="id" />
     <item name="imageView_indicator_dot" type="id" />
+    <item name="recyclerView_main" type="id" />
 </resources>
