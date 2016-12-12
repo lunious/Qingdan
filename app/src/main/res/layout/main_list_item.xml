@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rotate="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="20.0dip"
+    android:paddingTop="20.0dip">
+
+    <ImageView
+        android:layout_width="104.0dip"
+        android:layout_height="97.0dip"
+        android:src="@drawable/home_article_img_twill" />
+
+    <RelativeLayout
+        android:id="@id/rela_temp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20.0dip"
+        android:layout_marginRight="20.0dip"
+        android:layout_marginTop="20.0dip"
+        android:background="@color/white">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            xmlns:fresco="http://schemas.android.com/apk/res-auto"
+            android:id="@id/imageView_front_top_image"
+            android:layout_width="fill_parent"
+            android:layout_height="186.0dip"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop"
+            fresco:placeholderImage="@drawable/loading_placeholder"
+            fresco:placeholderImageScaleType="fitCenter"
+            fresco:fadeDuration="1000"
+            />
+        <View
+            android:id="@id/view_temp"
+            android:layout_width="200.0dip"
+            android:layout_height="1.0dip"
+            android:layout_below="@id/imageView_front_top_image"
+            android:layout_marginBottom="3.0dip"
+            android:layout_marginTop="6.0dip"
+            android:background="#ffdcdcdc" />
+
+        <TextView
+            android:id="@id/textView_front_main_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_temp"
+            android:layout_marginRight="38.0dip"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="This is main title."
+            android:textColor="#ff434343"
+            android:textSize="22.0sp" />
+
+        <LinearLayout
+            android:id="@id/linear_temp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView_front_main_title"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@id/textView_front_subtitle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="38.0dip"
+                android:layout_marginTop="10.0dip"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="This is subtitle."
+                android:textColor="#ff999999"
+                android:textSize="12.0sp" />
+
+            <LinearLayout
+                android:id="@id/linear_bottom_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/imageView_front_top_image"
+                android:layout_below="@id/textView_front_subtitle"
+                android:layout_marginTop="20.0dip"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingRight="15.0dip">
+
+                <ImageView
+                    android:id="@id/imageView_front_like"
+                    android:layout_width="15.0dip"
+                    android:layout_height="15.0dip"
+                    android:src="@drawable/home_card_img_heart_hl" />
+
+                <TextView
+                    android:id="@id/textView_front_num_liked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5.0dip"
+                    android:text="0000"
+                    android:textColor="#ff999999"
+                    android:textSize="12.0sp" />
+
+                <ImageView
+                    android:layout_width="15.0dip"
+                    android:layout_height="15.0dip"
+                    android:layout_marginLeft="15.0dip"
+                    android:src="@drawable/home_img_eye_nor" />
+
+                <TextView
+                    android:id="@id/textView_num_reviews"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5.0dip"
+                    android:text="0000"
+                    android:textColor="#ff999999"
+                    android:textSize="12.0sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@id/rotate_textView_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/linear_temp"
+            android:layout_marginTop="-15.0dip"
+            android:text="Feb 15"
+            android:textColor="#ffa0a0a0"
+            android:textSize="9.0sp" />
+
+        <View
+            android:layout_width="11.0dip"
+            android:layout_height="3.0dip"
+            android:layout_alignRight="@id/rotate_textView_date"
+            android:layout_below="@id/rotate_textView_date"
+            android:layout_marginTop="6.0dip"
+            android:background="#ff6900a6" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@id/rela_special_tag"
+        android:layout_width="44.0dip"
+        android:layout_height="30.0dip"
+        android:layout_marginLeft="30.0dip"
+        android:layout_marginTop="30.0dip"
+        android:background="@drawable/main_item_bg_tag"
+        android:gravity="center"
+        android:paddingBottom="3.0dip"
+        android:paddingLeft="10.0dip"
+        android:paddingRight="10.0dip"
+        android:paddingTop="3.0dip"
+        android:text="专题"
+        android:textColor="#ff4a4a4a"
+        android:textSize="10.0sp" />
+</RelativeLayout>

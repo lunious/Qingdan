@@ -15,4 +15,18 @@
     <item name="viewPager_main_fragment" type="id" />
     <item name="imageView_subview_main_slide_page" type="id" />
     <item name="imageView_indicator_dot" type="id" />
+    <item name="recyclerView_main" type="id" />
+    <item name="recyclerView" type="id" />
+    <item name="rela_temp" type="id" />
+    <item name="imageView_front_top_image" type="id" />
+    <item name="view_temp" type="id" />
+    <item name="textView_front_main_title" type="id" />
+    <item name="linear_temp" type="id" />
+    <item name="textView_front_subtitle" type="id" />
+    <item name="linear_bottom_count" type="id" />
+    <item name="imageView_front_like" type="id" />
+    <item name="textView_front_num_liked" type="id" />
+    <item name="textView_num_reviews" type="id" />
+    <item name="rotate_textView_date" type="id" />
+    <item name="rela_special_tag" type="id" />
 </resources>
