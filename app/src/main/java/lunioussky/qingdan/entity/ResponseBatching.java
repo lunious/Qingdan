@@ -185,6 +185,24 @@ public class ResponseBatching {
                         public static class ExtraBean {
                             private String category_id;
                             private String category_slug;
+                            private String collection_id;
+                            private String collection_hash;
+
+                            public String getCollection_id() {
+                                return collection_id;
+                            }
+
+                            public void setCollection_id(String collection_id) {
+                                this.collection_id = collection_id;
+                            }
+
+                            public String getCollection_hash() {
+                                return collection_hash;
+                            }
+
+                            public void setCollection_hash(String collection_hash) {
+                                this.collection_hash = collection_hash;
+                            }
 
                             public String getCategory_id() {
                                 return category_id;

@@ -3,12 +3,14 @@ package lunioussky.qingdan.gui.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import lunioussky.qingdan.entity.ResponseBatching;
-import lunioussky.qingdan.gui.fragment.MainListFrament;
+import lunioussky.qingdan.gui.fragment.MainListFragment;
+import lunioussky.qingdan.utils.Contants;
 
 /**
  * Created by Administrator on 2016/12/2.
@@ -22,9 +24,27 @@ public class MainTabFragmentPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         this.datas = datas;
         fragments = new ArrayList<>();
-        for (int i = 0; i < datas.size() + 1; i++) {
-            fragments.add(new MainListFrament());
+        //因为有个"最新标签"不是来自于数据源，所以fragment集合个数要比数据源条数多1个
+        fragments.add(MainListFragment.newInstance(Contants.TAG_NODES,"http://api.eqingdan.com/v1/front?page={0}"));
+        for (ResponseBatching.DataBean1.ChannelsBean1.BodyBean.DataBean.ChannelsBean data:datas) {
+            String urlTag = null;
+            if ("collections".equals(data.getType())){
+                urlTag = "http://api.eqingdan.com/v1/collections?page={0}";
+                fragments.add(MainListFragment.newInstance(Contants.TAG_COLLECTIONS,urlTag));
+            }else if ("articles_belong_to_category".equals(data.getType())){
+                urlTag = "http://api.eqingdan.com/v1/categories/"+data.getExtra().getCategory_slug()+"/articles?page={0}";
+                fragments.add(MainListFragment.newInstance(Contants.TAG_ARTICLES,urlTag));
+            }else if ("articles_belong_to_collection".equals(data.getType())){
+                urlTag = "http://api.eqingdan.com/v1/collections/"
+                        + data.getExtra().getCollection_id()
+                        +"/articles?page={0}";
+                fragments.add(MainListFragment.newInstance(Contants.TAG_ARTICLES,urlTag));
+            }
         }
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
     }
 
     @Override
