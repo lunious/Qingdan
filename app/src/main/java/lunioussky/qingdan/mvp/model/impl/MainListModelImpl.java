@@ -1,5 +1,7 @@
 package lunioussky.qingdan.mvp.model.impl;
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSON;
 
 import lunioussky.qingdan.entity.ResponseMainListData;
@@ -22,6 +24,7 @@ public class MainListModelImpl implements MainListModel {
         HttpClient.excute(builder, new HttpUtils.Callback() {
             @Override
             public void onResponse(String response) {
+                Log.d("MainListModelImpl", response);
                 ResponseMainListData responseMainListData = JSON.parseObject(response,ResponseMainListData.class);
                 if (responseMainListData.getData().getMeta().getPagination().getTotal_pages() ==
                         responseMainListData.getData().getMeta().getPagination().getCurrent_page()){

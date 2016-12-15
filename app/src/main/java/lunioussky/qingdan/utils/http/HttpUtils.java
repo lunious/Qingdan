@@ -17,8 +17,6 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import lunioussky.qingdan.utils.UnicodeParser;
-
 /**
  * Created by Administrator on 2016/12/1.
  */
@@ -136,7 +134,7 @@ public class HttpUtils {
                 while((line = br.readLine()) != null){
                     sb.append(line);
                 }
-                String result = UnicodeParser.decodeUnicode(sb.toString());
+                String result = sb.toString();
                 Log.d("MainFragment2", result);
                 if(callback == null) return;
 

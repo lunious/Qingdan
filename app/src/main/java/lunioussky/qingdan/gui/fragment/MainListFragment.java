@@ -15,10 +15,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import lunioussky.qingdan.R;
 import lunioussky.qingdan.entity.ResponseMainListData;
+import lunioussky.qingdan.gui.adapter.ArticlesRecyclerViewAdapter;
+import lunioussky.qingdan.gui.adapter.BaseMainListRecycleViewAdapter;
+import lunioussky.qingdan.gui.adapter.CollectionsRecyclerViewAdapter;
 import lunioussky.qingdan.gui.adapter.NodesRecyclerViewAdapter;
 import lunioussky.qingdan.mvp.presenter.MainListPresenter;
 import lunioussky.qingdan.mvp.presenter.impl.MainListPresenterImpl;
 import lunioussky.qingdan.mvp.view.MainListView;
+import lunioussky.qingdan.utils.Contants;
 
 /**
  * Created by Administrator on 2016/12/2.
@@ -38,7 +42,7 @@ public class MainListFragment extends BaseFragment implements MainListView{
     /****代表访问的数据接口*****/
     private String urlTag;
     private MainListPresenter presenter;
-    private NodesRecyclerViewAdapter recyclerViewAdapter;
+    private BaseMainListRecycleViewAdapter recyclerViewAdapter;
 
     public static MainListFragment newInstance(int categoryTag,String urlTag){
         MainListFragment fragment = new MainListFragment();
@@ -67,7 +71,18 @@ public class MainListFragment extends BaseFragment implements MainListView{
         presenter = new MainListPresenterImpl(this,urlTag);
         presenter.loadNextPageDatas();
 
-        recyclerViewAdapter = new NodesRecyclerViewAdapter(getActivity());
+        //根叔数据类型来创建对应的adapter
+        switch (categoryTag){
+            case Contants.TAG_ARTICLES:
+                recyclerViewAdapter = new ArticlesRecyclerViewAdapter(getActivity());
+                break;
+            case Contants.TAG_COLLECTIONS:
+                recyclerViewAdapter = new CollectionsRecyclerViewAdapter(getActivity());
+                break;
+            case Contants.TAG_NODES:
+                recyclerViewAdapter = new NodesRecyclerViewAdapter(getActivity());
+                break;
+        }
         recyclerView.setAdapter(recyclerViewAdapter);
 
     }
@@ -87,11 +102,13 @@ public class MainListFragment extends BaseFragment implements MainListView{
     @Override
     public void loadArticlesSuccess(List<ResponseMainListData.DataBean.ArticlesBean> articles) {
         Log.d("MainListFragment", "Articles:"+articles.get(0).getTitle());
+        recyclerViewAdapter.addDatas(articles);
     }
 
     @Override
     public void loadCollectionsSuccess(List<ResponseMainListData.DataBean.CollectionsBean> collections) {
         Log.d("MainListFragment", "Collections:"+ collections.get(0).getTitle());
+        recyclerViewAdapter.addDatas(collections);
     }
 
     @Override
