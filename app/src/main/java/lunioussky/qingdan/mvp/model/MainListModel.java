@@ -9,13 +9,13 @@ import lunioussky.qingdan.entity.ResponseMainListData;
  */
 
 public interface MainListModel {
-    void loadNextPageDatas(CallBack callBack);
+    void loadNextPageDatas(String url,CallBack callBack);
 
     public interface CallBack{
         void loadCollectionsSuccess(List<ResponseMainListData.DataBean.CollectionsBean> collections);
         void loadNodesSuccess(List<ResponseMainListData.DataBean.NodesBean> nodes);
         void loadArticlesSuccess(List<ResponseMainListData.DataBean.ArticlesBean> articles);
+        void loadFailed();
         void noMoreData();
-        void loadFailed(int page);
     }
 }

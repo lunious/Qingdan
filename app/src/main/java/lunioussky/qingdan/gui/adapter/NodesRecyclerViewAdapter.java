@@ -18,14 +18,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import lunioussky.qingdan.R;
-import lunioussky.qingdan.entity.ResponseNodes;
+import lunioussky.qingdan.entity.ResponseMainListData;
 
 /**
  * Created by 11645 on 2016/12/9.
  */
 
 public class NodesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<ResponseNodes.DataBean.NodesBean> datas;
+    private List<ResponseMainListData.DataBean.NodesBean> datas;
     private LayoutInflater inflater;
 
     public NodesRecyclerViewAdapter(Context context) {
@@ -34,7 +34,7 @@ public class NodesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.
     }
 
     //新增数据
-    public void addDatas(List<ResponseNodes.DataBean.NodesBean> datas) {
+    public void addDatas(List<ResponseMainListData.DataBean.NodesBean> datas) {
         this.datas.addAll(datas);
         notifyDataSetChanged();
     }
@@ -48,7 +48,7 @@ public class NodesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myViewHolder = (MyViewHolder) holder;
-        ResponseNodes.DataBean.NodesBean nodesBean = datas.get(position);
+        ResponseMainListData.DataBean.NodesBean nodesBean = datas.get(position);
         myViewHolder.imageViewFrontTopImage.setImageURI(nodesBean.getFeaturedImageUrl());
         myViewHolder.textViewFrontMainTitle.setText(nodesBean.getTitle());
         myViewHolder.textViewFrontSubtitle.setText(nodesBean.getSubtitle());
