@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 import lunioussky.qingdan.R;
 import lunioussky.qingdan.entity.ResponseMainListData;
 import lunioussky.qingdan.gui.adapter.ArticlesRecyclerViewAdapter;
-import lunioussky.qingdan.gui.adapter.BaseMainListRecycleViewAdapter;
+import lunioussky.qingdan.gui.adapter.BaseMainListRecyclerViewAdapter;
 import lunioussky.qingdan.gui.adapter.CollectionsRecyclerViewAdapter;
 import lunioussky.qingdan.gui.adapter.NodesRecyclerViewAdapter;
 import lunioussky.qingdan.mvp.presenter.MainListPresenter;
@@ -43,7 +43,7 @@ public class MainListFragment extends BaseFragment implements MainListView{
     /****代表访问的数据接口*****/
     private String urlTag;
     private MainListPresenter presenter;
-    private BaseMainListRecycleViewAdapter recyclerViewAdapter;
+    private BaseMainListRecyclerViewAdapter recyclerViewAdapter;
     LinearLayoutManager layoutManager;
     public static MainListFragment newInstance(int categoryTag,String urlTag){
         MainListFragment fragment = new MainListFragment();
