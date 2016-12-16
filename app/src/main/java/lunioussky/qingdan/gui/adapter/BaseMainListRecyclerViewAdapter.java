@@ -6,13 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,29 +20,13 @@ import lunioussky.qingdan.R;
  * Created by 11645 on 2016/12/16.
  */
 
-public abstract class BaseMainListRecycleViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<T> datas;
+public abstract class BaseMainListRecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
     protected LayoutInflater inflater;
-    public BaseMainListRecycleViewAdapter(Context context) {
-        inflater = LayoutInflater.from(context);
-        datas = new ArrayList<>();
-    }
-    //新增数据
-    public void addDatas(List<T> datas){
-        this.datas.addAll(datas);
-        notifyDataSetChanged();
+    public BaseMainListRecyclerViewAdapter(Context context) {
+        super(context);
     }
 
-    @Override
-    public int getItemCount() {
-        //TODO 到时候要考虑header和footer
-        return datas.size();
-    }
-    //获取对应位置的数据
-    public T getItem(int position){
-        //TODO 到时候要考虑header和footer
-        return datas.get(position);
-    }
+
     static class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.imageView_front_top_image)
         SimpleDraweeView imageViewFrontTopImage;
@@ -72,6 +54,19 @@ public abstract class BaseMainListRecycleViewAdapter<T> extends RecyclerView.Ada
         TextView relaSpecialTag;
 
         MyViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
+    }
+    static class FooterViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.progressbar_subview_recycleview_loadfooter)
+        ProgressBar progressbarSubviewRecycleviewLoadfooter;
+        @BindView(R.id.textview_subview_recycleview_loadfooter)
+        TextView textviewSubviewRecycleviewLoadfooter;
+        @BindView(R.id.layout_subview_recycleview_loadfooter)
+        RelativeLayout layoutSubviewRecycleviewLoadfooter;
+
+        FooterViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

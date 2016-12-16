@@ -29,4 +29,7 @@
     <item name="textView_num_reviews" type="id" />
     <item name="rotate_textView_date" type="id" />
     <item name="rela_special_tag" type="id" />
+    <item name="layout_subview_recycleview_loadfooter" type="id" />
+    <item name="progressbar_subview_recycleview_loadfooter" type="id" />
+    <item name="textview_subview_recycleview_loadfooter" type="id" />
 </resources>

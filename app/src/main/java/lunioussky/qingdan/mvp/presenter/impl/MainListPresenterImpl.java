@@ -1,5 +1,7 @@
 package lunioussky.qingdan.mvp.presenter.impl;
 
+import android.util.Log;
+
 import java.util.List;
 
 import lunioussky.qingdan.entity.ResponseMainListData;
@@ -29,6 +31,7 @@ public class MainListPresenterImpl implements MainListPresenter{
     public void loadNextPageDatas() {
         view.showRecycleViewFooterLoading();
         String url = UrlHandler.handlUrl(urlTag,nextPage);
+        Log.d("MainListPresenterImpl", "正在获取第:" + nextPage + "页的数据");
         model.loadNextPageDatas(url, new MainListModel.CallBack() {
             @Override
             public void loadCollectionsSuccess(List<ResponseMainListData.DataBean.CollectionsBean> collections) {
