@@ -2,10 +2,7 @@ package lunioussky.qingdan.gui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.view.ViewGroup;
 
-import lunioussky.qingdan.R;
 import lunioussky.qingdan.entity.ResponseMainListData;
 
 /**
@@ -16,12 +13,6 @@ public class ArticlesRecyclerViewAdapter extends BaseMainListRecycleViewAdapter<
 
     public ArticlesRecyclerViewAdapter(Context context) {
         super(context);
-    }
-
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(R.layout.main_list_item, parent, false);
-        return new MyViewHolder(itemView);
     }
 
     @Override

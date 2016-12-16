@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -45,6 +46,13 @@ public abstract class BaseMainListRecycleViewAdapter<T> extends RecyclerView.Ada
         //TODO 到时候要考虑header和footer
         return datas.get(position);
     }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = inflater.inflate(R.layout.main_list_item, parent, false);
+        return new MyViewHolder(itemView);
+    }
+
     static class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.imageView_front_top_image)
         SimpleDraweeView imageViewFrontTopImage;

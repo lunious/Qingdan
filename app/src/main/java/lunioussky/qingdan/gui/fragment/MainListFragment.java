@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class MainListFragment extends BaseFragment implements MainListView{
     private String urlTag;
     private MainListPresenter presenter;
     private BaseMainListRecycleViewAdapter recyclerViewAdapter;
-
+    LinearLayoutManager layoutManager;
     public static MainListFragment newInstance(int categoryTag,String urlTag){
         MainListFragment fragment = new MainListFragment();
         Bundle bundle = new Bundle();
@@ -56,8 +57,7 @@ public class MainListFragment extends BaseFragment implements MainListView{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -85,7 +85,26 @@ public class MainListFragment extends BaseFragment implements MainListView{
         }
         recyclerView.setAdapter(recyclerViewAdapter);
 
+        recyclerView.addOnScrollListener(onScrollListener);
+
     }
+    private boolean isNoMoreData;
+    private boolean isLoading;
+    private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            //如果没有下一页数据就不再触发获取下一页数据
+            if (isNoMoreData){
+                return;
+            }
+            if (!isLoading && layoutManager.findLastVisibleItemPosition() == layoutManager.getItemCount() - 1){
+                isLoading = true;
+                presenter.loadNextPageDatas();
+            }
+        }
+    };
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
@@ -97,18 +116,21 @@ public class MainListFragment extends BaseFragment implements MainListView{
     @Override
     public void loadNodesSuccess(List<ResponseMainListData.DataBean.NodesBean> nodes) {
         recyclerViewAdapter.addDatas(nodes);
+        isLoading =false;
     }
 
     @Override
     public void loadArticlesSuccess(List<ResponseMainListData.DataBean.ArticlesBean> articles) {
         Log.d("MainListFragment", "Articles:"+articles.get(0).getTitle());
         recyclerViewAdapter.addDatas(articles);
+        isLoading =false;
     }
 
     @Override
     public void loadCollectionsSuccess(List<ResponseMainListData.DataBean.CollectionsBean> collections) {
         Log.d("MainListFragment", "Collections:"+ collections.get(0).getTitle());
         recyclerViewAdapter.addDatas(collections);
+        isLoading = false;
     }
 
     @Override
@@ -118,11 +140,12 @@ public class MainListFragment extends BaseFragment implements MainListView{
 
     @Override
     public void showRecycleViewFooterLoadFailed() {
-
+        isLoading =false;
     }
 
     @Override
     public void showRecycleViewFooterNoMoreData() {
-
+        isNoMoreData = true;
+        Toast.makeText(getActivity(), "没有更多数据了", Toast.LENGTH_SHORT).show();
     }
 }
