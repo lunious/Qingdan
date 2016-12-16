@@ -13,8 +13,8 @@ import lunioussky.qingdan.entity.ResponseMainListData;
 
 public class ArticlesRecyclerViewAdapter extends BaseMainListRecyclerViewAdapter<ResponseMainListData.DataBean.ArticlesBean> {
 
-    private static int TYPE_CONTENT = 0;
-    private static int TYPE_FOOTER = 1;
+    private static final int TYPE_CONTENT = 0;
+    private static final int TYPE_FOOTER = 1;
 
 
     public ArticlesRecyclerViewAdapter(Context context) {
@@ -56,6 +56,7 @@ public class ArticlesRecyclerViewAdapter extends BaseMainListRecyclerViewAdapter
         }
         if (position >= getItemCount() - getFooterCount()){
             //TODO 去设置脚部视图的数据（如果需要）
+            onBindFooterViewHolder(holder,position);
             return;
         }
         MyViewHolder myViewHolder = (MyViewHolder) holder;

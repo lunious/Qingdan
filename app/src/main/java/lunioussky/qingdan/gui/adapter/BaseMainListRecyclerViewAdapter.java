@@ -2,7 +2,6 @@ package lunioussky.qingdan.gui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,11 +20,39 @@ import lunioussky.qingdan.R;
  */
 
 public abstract class BaseMainListRecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
-    protected LayoutInflater inflater;
+
     public BaseMainListRecyclerViewAdapter(Context context) {
         super(context);
     }
 
+    public static final int STATE_LOADING = 1;
+    public static final int STATE_FAILED = 2;
+    public static final int STATE_NO_MORE_DATA = 3;
+    private int state;
+    public void updateFooterViewState(int state) {
+        this.state = state;
+        notifyDataSetChanged();//刷新Adapter
+    }
+
+    public void onBindFooterViewHolder(RecyclerView.ViewHolder holder, int position){
+        FooterViewHolder footerHolder = (FooterViewHolder) holder;
+        switch (state){
+            case STATE_LOADING:
+                footerHolder.progressbarSubviewRecycleviewLoadfooter.setVisibility(View.VISIBLE);
+                footerHolder.textviewSubviewRecycleviewLoadfooter.setVisibility(View.GONE);
+                break;
+            case STATE_FAILED:
+                footerHolder.progressbarSubviewRecycleviewLoadfooter.setVisibility(View.GONE);
+                footerHolder.textviewSubviewRecycleviewLoadfooter.setVisibility(View.VISIBLE);
+                footerHolder.textviewSubviewRecycleviewLoadfooter.setText("没有更多数据了亲~");
+                break;
+            case STATE_NO_MORE_DATA:
+                footerHolder.progressbarSubviewRecycleviewLoadfooter.setVisibility(View.GONE);
+                footerHolder.textviewSubviewRecycleviewLoadfooter.setVisibility(View.VISIBLE);
+                footerHolder.textviewSubviewRecycleviewLoadfooter.setText("加载失败，点击重试~");
+                break;
+        }
+    }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.imageView_front_top_image)
@@ -58,7 +85,7 @@ public abstract class BaseMainListRecyclerViewAdapter<T> extends BaseRecyclerVie
             ButterKnife.bind(this, view);
         }
     }
-    static class FooterViewHolder extends RecyclerView.ViewHolder {
+    public  class FooterViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.progressbar_subview_recycleview_loadfooter)
         ProgressBar progressbarSubviewRecycleviewLoadfooter;
         @BindView(R.id.textview_subview_recycleview_loadfooter)
@@ -69,6 +96,22 @@ public abstract class BaseMainListRecyclerViewAdapter<T> extends BaseRecyclerVie
         FooterViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            textviewSubviewRecycleviewLoadfooter.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    if (listener != null){
+                        listener.onRetryClick();//告诉fragment重试的按钮被点击了
+                    }
+                }
+            });
         }
     }
-}
+        public interface OnRetryClickListener{
+            void onRetryClick();
+        }
+        private OnRetryClickListener listener;
+        public  void setOnRetryClickListener(OnRetryClickListener listener){
+            this.listener = listener;
+        }
+    }
