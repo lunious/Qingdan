@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/hs_temp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="8.0dip"
+        android:scaleType="centerInside"
+        android:src="@drawable/img_ranking_review_tag" />
+    <HorizontalScrollView
+        android:id="@id/hs_temp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20.0dip"
+        android:paddingTop="20.0dip"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10.0dip"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingRight="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="73.0dip"
+                android:scaleType="centerInside"
+                android:src="@drawable/img_ranking_topictitle" />
+
+            <LinearLayout
+                android:id="@id/ll_item_ranking_enter"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal" />
+
+            <ImageView
+                android:id="@id/img_ranking_all_topic_enter"
+                android:layout_width="98.0dip"
+                android:layout_height="73.0dip"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="10.0dip"
+                android:scaleType="centerInside"
+                android:src="@drawable/img_ranking_alltopics" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</RelativeLayout>

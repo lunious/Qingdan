@@ -38,7 +38,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
     //获取对应位置的数据
     public T getItem(int position){
         //TODO 到时候要考虑header和footer
-        return datas.get(position);
+        return datas.get(position - getHeaderCount());
     }
 
 }

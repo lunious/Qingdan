@@ -6,4 +6,5 @@ package lunioussky.qingdan.mvp.presenter;
 
 public interface MainListPresenter {
     void loadNextPageDatas();
+    void loadReputationData();
 }

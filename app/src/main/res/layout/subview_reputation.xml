@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <com.facebook.drawee.view.SimpleDraweeView
+        xmlns:fresco="http://schemas.android.com/apk/res-auto"
+        android:id="@id/img_ranking_all_topic_enter"
+        android:layout_width="98.0dip"
+        android:layout_height="73.0dip"
+        android:layout_marginLeft="10.0dip"
+        android:scaleType="centerInside"
+        android:padding="1dp"
+        android:background="@drawable/shape_reputation_bg"
+        fresco:placeholderImage="@drawable/loading_placeholder"
+        android:src="@drawable/img_ranking_alltopics" />
+</LinearLayout>

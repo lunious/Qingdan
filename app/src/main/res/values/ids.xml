@@ -32,4 +32,7 @@
     <item name="layout_subview_recycleview_loadfooter" type="id" />
     <item name="progressbar_subview_recycleview_loadfooter" type="id" />
     <item name="textview_subview_recycleview_loadfooter" type="id" />
+    <item name="hs_temp" type="id" />
+    <item name="ll_item_ranking_enter" type="id" />
+    <item name="img_ranking_all_topic_enter" type="id" />
 </resources>
