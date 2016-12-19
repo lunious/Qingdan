@@ -47,7 +47,6 @@ public class ArticlesRecyclerViewAdapter extends BaseMainListRecyclerViewAdapter
         return new FooterViewHolder(inflater.inflate(R.layout.subview_recycleview_loadfooter, parent, false));
     }
 
-
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (position < getHeaderCount()){
