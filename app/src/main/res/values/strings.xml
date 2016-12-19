@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Qingdan</string>
     <string name="noMoreData">没有更多数据了亲~</string>
+    <string name="lookup_goods">查看商品</string>
+    <string name="like_count">喜欢(%1$d)</string>
+    <string name="comments_count">评论(%1$d)</string>
 </resources>

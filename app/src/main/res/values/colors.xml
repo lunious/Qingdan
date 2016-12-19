@@ -8,4 +8,5 @@
     <color name="tabIndicatorColor">#ff000000</color>
     <color name="tabSelectedTextColor">#ff000000</color>
     <color name="tabTextColor">#ff848484</color>
+    <color name="black">#000000</color>
 </resources>

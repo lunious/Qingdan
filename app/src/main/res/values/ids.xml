@@ -36,4 +36,14 @@
     <item name="ll_item_ranking_enter" type="id" />
     <item name="img_ranking_all_topic_enter" type="id" />
     <item name="fab_fragment_main_list" type="id" />
+    <item name="textview_title_subview_title" type="id" />
+    <item name="imageView_back_subview_title" type="id" />
+    <item name="textView_like_count" type="id" />
+    <item name="layout_like_count" type="id" />
+    <item name="layout_comments_count" type="id" />
+    <item name="textView_comments_count" type="id" />
+    <item name="layout_shared" type="id" />
+    <item name="textView_lookup_goods" type="id" />
+    <item name="imageView_big_subview_artocle_title" type="id" />
+    <item name="textView_tag_subview_artocle_title" type="id" />
 </resources>
