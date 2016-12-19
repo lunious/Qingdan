@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import lunioussky.qingdan.R;
 import lunioussky.qingdan.entity.ResponseMainListData;
+import lunioussky.qingdan.entity.ResponseReputation;
 import lunioussky.qingdan.gui.adapter.ArticlesRecyclerViewAdapter;
 import lunioussky.qingdan.gui.adapter.BaseMainListRecyclerViewAdapter;
 import lunioussky.qingdan.gui.adapter.CollectionsRecyclerViewAdapter;
@@ -67,11 +68,9 @@ public class MainListFragment extends BaseFragment implements MainListView{
 
         Log.d("MainListFragment", "categoryTag:" + categoryTag);
         Log.d("MainListFragment", "urlTag:" + urlTag);
-        //创建Presenter对象
-        presenter = new MainListPresenterImpl(this,urlTag);
-        presenter.loadNextPageDatas();
 
-        //根叔数据类型来创建对应的adapter
+
+        //根据数据类型来创建对应的adapter
         switch (categoryTag){
             case Contants.TAG_ARTICLES:
                 recyclerViewAdapter = new ArticlesRecyclerViewAdapter(getActivity());
@@ -83,10 +82,29 @@ public class MainListFragment extends BaseFragment implements MainListView{
                 recyclerViewAdapter = new NodesRecyclerViewAdapter(getActivity());
                 break;
         }
+        recyclerViewAdapter.setOnRetryClickListener(new BaseMainListRecyclerViewAdapter.OnRetryClickListener() {
+            @Override
+            public void onRetryClick() {
+                loadNextDatas();
+            }
+        });
         recyclerView.setAdapter(recyclerViewAdapter);
 
         recyclerView.addOnScrollListener(onScrollListener);
 
+        //创建Presenter对象
+        presenter = new MainListPresenterImpl(this,urlTag);
+        loadNextDatas();
+
+        //如果是最新对应的页面就去加载口碑数据
+        if (categoryTag == Contants.TAG_NODES){
+            presenter.loadReputationData();
+        }
+
+    }
+    private void loadNextDatas(){
+        presenter.loadNextPageDatas();
+        isLoading = true;
     }
     private boolean isNoMoreData;
     private boolean isLoading;
@@ -99,8 +117,7 @@ public class MainListFragment extends BaseFragment implements MainListView{
                 return;
             }
             if (!isLoading && layoutManager.findLastVisibleItemPosition() == layoutManager.getItemCount() - 1){
-                isLoading = true;
-                presenter.loadNextPageDatas();
+                loadNextDatas();
             }
         }
     };
@@ -121,31 +138,40 @@ public class MainListFragment extends BaseFragment implements MainListView{
 
     @Override
     public void loadArticlesSuccess(List<ResponseMainListData.DataBean.ArticlesBean> articles) {
-        Log.d("MainListFragment", "Articles:"+articles.get(0).getTitle());
         recyclerViewAdapter.addDatas(articles);
         isLoading =false;
     }
 
     @Override
     public void loadCollectionsSuccess(List<ResponseMainListData.DataBean.CollectionsBean> collections) {
-        Log.d("MainListFragment", "Collections:"+ collections.get(0).getTitle());
         recyclerViewAdapter.addDatas(collections);
         isLoading = false;
     }
 
     @Override
     public void showRecycleViewFooterLoading() {
+        recyclerViewAdapter.updateFooterViewState(BaseMainListRecyclerViewAdapter.STATE_LOADING);
 
     }
 
     @Override
     public void showRecycleViewFooterLoadFailed() {
         isLoading =false;
+        recyclerViewAdapter.updateFooterViewState(BaseMainListRecyclerViewAdapter.STATE_FAILED);
     }
 
     @Override
     public void showRecycleViewFooterNoMoreData() {
         isNoMoreData = true;
         Toast.makeText(getActivity(), "没有更多数据了", Toast.LENGTH_SHORT).show();
+        recyclerViewAdapter.updateFooterViewState(BaseMainListRecyclerViewAdapter.STATE_NO_MORE_DATA);
+    }
+
+    @Override
+    public void showReputation(List<ResponseReputation.DataBean.RankingsBean> rankings) {
+        if (recyclerViewAdapter instanceof NodesRecyclerViewAdapter){
+            NodesRecyclerViewAdapter adapter = (NodesRecyclerViewAdapter) recyclerViewAdapter;
+            adapter.setRankings(rankings);
+        }
     }
 }

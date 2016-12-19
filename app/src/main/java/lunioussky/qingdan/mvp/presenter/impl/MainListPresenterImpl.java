@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.List;
 
 import lunioussky.qingdan.entity.ResponseMainListData;
+import lunioussky.qingdan.entity.ResponseReputation;
 import lunioussky.qingdan.mvp.model.MainListModel;
 import lunioussky.qingdan.mvp.model.impl.MainListModelImpl;
 import lunioussky.qingdan.mvp.presenter.MainListPresenter;
@@ -60,5 +61,20 @@ public class MainListPresenterImpl implements MainListPresenter{
             }
         });
         nextPage++;
+    }
+
+    @Override
+    public void loadReputationData() {
+        model.loadReputationData(new MainListModel.ReputationCallBack() {
+            @Override
+            public void loadSuccess(List<ResponseReputation.DataBean.RankingsBean> rankings) {
+                view.showReputation(rankings);
+            }
+
+            @Override
+            public void loadFailed() {
+
+            }
+        });
     }
 }

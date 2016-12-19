@@ -5,7 +5,9 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 
 import lunioussky.qingdan.entity.ResponseMainListData;
+import lunioussky.qingdan.entity.ResponseReputation;
 import lunioussky.qingdan.mvp.model.MainListModel;
+import lunioussky.qingdan.utils.Apis;
 import lunioussky.qingdan.utils.http.HttpUtils;
 import lunioussky.qingdan.utils.http.Request;
 import lunioussky.qingdan.utils.http.qingdan.HttpClient;
@@ -47,4 +49,26 @@ public class MainListModelImpl implements MainListModel {
             }
         });
     }
+
+    @Override
+    public void loadReputationData(final ReputationCallBack callBack) {
+        Request.Builder builder = new Request.Builder()
+                .get()
+                .url(Apis.URL_REPUTATION);
+        HttpClient.excute(builder, new HttpUtils.Callback() {
+            @Override
+            public void onResponse(String response) {
+                ResponseReputation responseReputation = JSON.parseObject(response, ResponseReputation.class);
+                if (responseReputation.getCode() == 0){//code = 0 代表访问成功
+                    callBack.loadSuccess(responseReputation.getData().getRankings());
+                }
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
+    }
+
 }
