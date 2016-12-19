@@ -42,6 +42,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             mTabs[i].setOnClickListener(this);
         }
         mPagerAdapter = new MainFragmentPagerAdapter(getFragments(),getSupportFragmentManager());
+        mViewPager.setOffscreenPageLimit(2);//设置默认预加载个数 默认是1
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
             @Override

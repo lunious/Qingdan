@@ -2,6 +2,7 @@ package lunioussky.qingdan.gui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -30,27 +31,34 @@ import lunioussky.qingdan.utils.Contants;
  * Created by Administrator on 2016/12/2.
  */
 
-public class MainListFragment extends BaseFragment implements MainListView{
+public class MainListFragment extends BaseFragment implements MainListView, View.OnClickListener {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.fab_fragment_main_list)
+    FloatingActionButton fabFragmentMainList;
 
     @Override
     protected int getContentViewResId() {
         return R.layout.fragment_main_list;
     }
 
-     /****代表是哪一种数据类型*****/
+    /****
+     * 代表是哪一种数据类型
+     *****/
     private int categoryTag;
-    /****代表访问的数据接口*****/
+    /****
+     * 代表访问的数据接口
+     *****/
     private String urlTag;
     private MainListPresenter presenter;
     private BaseMainListRecyclerViewAdapter recyclerViewAdapter;
     LinearLayoutManager layoutManager;
-    public static MainListFragment newInstance(int categoryTag,String urlTag){
+
+    public static MainListFragment newInstance(int categoryTag, String urlTag) {
         MainListFragment fragment = new MainListFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("categoryTag",categoryTag);
-        bundle.putString("urlTag",urlTag);
+        bundle.putInt("categoryTag", categoryTag);
+        bundle.putString("urlTag", urlTag);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -71,7 +79,7 @@ public class MainListFragment extends BaseFragment implements MainListView{
 
 
         //根据数据类型来创建对应的adapter
-        switch (categoryTag){
+        switch (categoryTag) {
             case Contants.TAG_ARTICLES:
                 recyclerViewAdapter = new ArticlesRecyclerViewAdapter(getActivity());
                 break;
@@ -93,19 +101,42 @@ public class MainListFragment extends BaseFragment implements MainListView{
         recyclerView.addOnScrollListener(onScrollListener);
 
         //创建Presenter对象
-        presenter = new MainListPresenterImpl(this,urlTag);
+        presenter = new MainListPresenterImpl(this, urlTag);
         loadNextDatas();
 
         //如果是最新对应的页面就去加载口碑数据
-        if (categoryTag == Contants.TAG_NODES){
+        if (categoryTag == Contants.TAG_NODES) {
             presenter.loadReputationData();
         }
-
+        initFab();
     }
-    private void loadNextDatas(){
+    //初始化FloatActionButton
+    private void initFab(){
+        fabFragmentMainList.setOnClickListener(this);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (layoutManager.findLastVisibleItemPosition() == 0){
+                    fabFragmentMainList.hide();
+                    return;
+                }
+                if (dy > 0 && fabFragmentMainList.getVisibility() == View.VISIBLE){
+                    //如果往上滚动并且可见，把它隐藏
+                    fabFragmentMainList.hide();
+                }else if (dy < 0 && fabFragmentMainList.getVisibility() != View.VISIBLE){
+                    //如果往下滚动并且不可见，把它显示
+                    fabFragmentMainList.show();
+                }
+            }
+        });
+    }
+
+    private void loadNextDatas() {
         presenter.loadNextPageDatas();
         isLoading = true;
     }
+
     private boolean isNoMoreData;
     private boolean isLoading;
     private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
@@ -113,10 +144,10 @@ public class MainListFragment extends BaseFragment implements MainListView{
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
             //如果没有下一页数据就不再触发获取下一页数据
-            if (isNoMoreData){
+            if (isNoMoreData) {
                 return;
             }
-            if (!isLoading && layoutManager.findLastVisibleItemPosition() == layoutManager.getItemCount() - 1){
+            if (!isLoading && layoutManager.findLastVisibleItemPosition() == layoutManager.getItemCount() - 1) {
                 loadNextDatas();
             }
         }
@@ -133,13 +164,13 @@ public class MainListFragment extends BaseFragment implements MainListView{
     @Override
     public void loadNodesSuccess(List<ResponseMainListData.DataBean.NodesBean> nodes) {
         recyclerViewAdapter.addDatas(nodes);
-        isLoading =false;
+        isLoading = false;
     }
 
     @Override
     public void loadArticlesSuccess(List<ResponseMainListData.DataBean.ArticlesBean> articles) {
         recyclerViewAdapter.addDatas(articles);
-        isLoading =false;
+        isLoading = false;
     }
 
     @Override
@@ -156,7 +187,7 @@ public class MainListFragment extends BaseFragment implements MainListView{
 
     @Override
     public void showRecycleViewFooterLoadFailed() {
-        isLoading =false;
+        isLoading = false;
         recyclerViewAdapter.updateFooterViewState(BaseMainListRecyclerViewAdapter.STATE_FAILED);
     }
 
@@ -169,9 +200,21 @@ public class MainListFragment extends BaseFragment implements MainListView{
 
     @Override
     public void showReputation(List<ResponseReputation.DataBean.RankingsBean> rankings) {
-        if (recyclerViewAdapter instanceof NodesRecyclerViewAdapter){
+        if (recyclerViewAdapter instanceof NodesRecyclerViewAdapter) {
             NodesRecyclerViewAdapter adapter = (NodesRecyclerViewAdapter) recyclerViewAdapter;
             adapter.setRankings(rankings);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == fabFragmentMainList){
+            //让RecyclerView滚动到第0个位置
+            if (layoutManager.findLastVisibleItemPosition() < 10){
+                recyclerView.smoothScrollToPosition(0);//缓缓移动
+            }else {
+            recyclerView.scrollToPosition(0);//瞬间移动
+            }
         }
     }
 }

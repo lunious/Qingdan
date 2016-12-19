@@ -35,4 +35,5 @@
     <item name="hs_temp" type="id" />
     <item name="ll_item_ranking_enter" type="id" />
     <item name="img_ranking_all_topic_enter" type="id" />
+    <item name="fab_fragment_main_list" type="id" />
 </resources>
