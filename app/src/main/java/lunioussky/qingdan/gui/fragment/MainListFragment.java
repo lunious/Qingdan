@@ -1,5 +1,6 @@
 package lunioussky.qingdan.gui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,7 @@ import butterknife.ButterKnife;
 import lunioussky.qingdan.R;
 import lunioussky.qingdan.entity.ResponseMainListData;
 import lunioussky.qingdan.entity.ResponseReputation;
+import lunioussky.qingdan.gui.activity.ArticleDetailActivity;
 import lunioussky.qingdan.gui.adapter.ArticlesRecyclerViewAdapter;
 import lunioussky.qingdan.gui.adapter.BaseMainListRecyclerViewAdapter;
 import lunioussky.qingdan.gui.adapter.CollectionsRecyclerViewAdapter;
@@ -31,7 +33,7 @@ import lunioussky.qingdan.utils.Contants;
  * Created by Administrator on 2016/12/2.
  */
 
-public class MainListFragment extends BaseFragment implements MainListView, View.OnClickListener {
+public class MainListFragment extends BaseFragment implements MainListView, View.OnClickListener, BaseMainListRecyclerViewAdapter.OnItemClickListener {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.fab_fragment_main_list)
@@ -96,8 +98,8 @@ public class MainListFragment extends BaseFragment implements MainListView, View
                 loadNextDatas();
             }
         });
+        recyclerViewAdapter.setOnItemClickListener(this);
         recyclerView.setAdapter(recyclerViewAdapter);
-
         recyclerView.addOnScrollListener(onScrollListener);
 
         //创建Presenter对象
@@ -215,6 +217,29 @@ public class MainListFragment extends BaseFragment implements MainListView, View
             }else {
             recyclerView.scrollToPosition(0);//瞬间移动
             }
+        }
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        if (categoryTag == Contants.TAG_NODES){
+            ResponseMainListData.DataBean.NodesBean nodes =
+                    (ResponseMainListData.DataBean.NodesBean) recyclerViewAdapter.getItem(position);
+            Toast.makeText(getActivity(), nodes.getTitle(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), ArticleDetailActivity.class);
+            intent.putExtra("articleId",nodes.getTarget_id());
+            startActivity(intent);
+        }else if (categoryTag == Contants.TAG_ARTICLES){
+            ResponseMainListData.DataBean.ArticlesBean articles =
+                    (ResponseMainListData.DataBean.ArticlesBean) recyclerViewAdapter.getItem(position);
+            Toast.makeText(getActivity(), articles.getTitle(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), ArticleDetailActivity.class);
+            intent.putExtra("articleId",articles.getId());
+            startActivity(intent);
+        }else if(categoryTag == Contants.TAG_COLLECTIONS){
+            ResponseMainListData.DataBean.CollectionsBean collections =
+                    (ResponseMainListData.DataBean.CollectionsBean) recyclerViewAdapter.getItem(position);
+            Toast.makeText(getActivity(), collections.getTitle(), Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -54,7 +54,7 @@ public abstract class BaseMainListRecyclerViewAdapter<T> extends BaseRecyclerVie
         }
     }
 
-    static class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.imageView_front_top_image)
         SimpleDraweeView imageViewFrontTopImage;
         @BindView(R.id.view_temp)
@@ -83,6 +83,15 @@ public abstract class BaseMainListRecyclerViewAdapter<T> extends BaseRecyclerVie
         MyViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int clickPosition = getAdapterPosition();//获取正在使用这个View的Item的位置
+                    if (onItemClickListener != null){
+                        onItemClickListener.onItemClick(v,clickPosition);
+                    }
+                }
+            });
         }
     }
     public  class FooterViewHolder extends RecyclerView.ViewHolder {
@@ -107,11 +116,22 @@ public abstract class BaseMainListRecyclerViewAdapter<T> extends BaseRecyclerVie
             });
         }
     }
-        public interface OnRetryClickListener{
-            void onRetryClick();
+    //失败重试按钮的监听
+    public interface OnRetryClickListener{
+        void onRetryClick();
         }
-        private OnRetryClickListener listener;
-        public  void setOnRetryClickListener(OnRetryClickListener listener){
-            this.listener = listener;
+    private OnRetryClickListener listener;
+    public  void setOnRetryClickListener(OnRetryClickListener listener){
+        this.listener = listener;
         }
+
+    //Item单击监听
+    public interface OnItemClickListener{
+        void onItemClick(View view,int position);
+        }
+    private OnItemClickListener onItemClickListener;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.onItemClickListener = onItemClickListener;
+    }
+
     }
