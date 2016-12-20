@@ -26,4 +26,7 @@ public interface ArticleDetailView {
     void showNoComments();
 
     void showMoreCommentsView();
+
+    void showLoadFailed();
 }
+

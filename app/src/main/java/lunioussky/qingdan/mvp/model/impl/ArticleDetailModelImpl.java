@@ -26,7 +26,7 @@ public class ArticleDetailModelImpl implements ArticleDetailModel{
         loadArticleTitle();
         loadArticleDetail();
         loadComments();
-        loadRrlatedArticles();
+        loadRelatedArticles();
     }
 
     @Override
@@ -44,14 +44,14 @@ public class ArticleDetailModelImpl implements ArticleDetailModel{
 
             @Override
             public void onError() {
-
+                callBack.loadFailed();
             }
         });
     }
 
     @Override
     public void loadArticleDetail() {
-        callBack.loadArticleDetailSuccess(UrlHandler.handlUrl(Apis.URL_ARTICLE_TITLE,articleId));
+        callBack.loadArticleDetailSuccess(UrlHandler.handlUrl(Apis.URL_ARTICLE_DETAIL,articleId));
     }
 
     @Override
@@ -69,13 +69,13 @@ public class ArticleDetailModelImpl implements ArticleDetailModel{
 
             @Override
             public void onError() {
-
+                callBack.loadFailed();
             }
         });
     }
 
     @Override
-    public void loadRrlatedArticles() {
+    public void loadRelatedArticles() {
         String url = UrlHandler.handlUrl(Apis.URL_RELATED_ARTICLE,articleId);
         Request.Builder builder = new Request.Builder()
                 .url(url)
@@ -89,7 +89,7 @@ public class ArticleDetailModelImpl implements ArticleDetailModel{
 
             @Override
             public void onError() {
-
+                callBack.loadFailed();
             }
         });
     }

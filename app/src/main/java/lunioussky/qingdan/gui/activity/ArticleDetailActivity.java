@@ -1,6 +1,8 @@
 package lunioussky.qingdan.gui.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.cjj.MaterialRefreshLayout;
+import com.cjj.MaterialRefreshListener;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
@@ -70,6 +74,8 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
     TextView textviewTitleSubviewTitle;
     @BindView(R.id.layout_comments)
     LinearLayout layoutComments;
+    @BindView(R.id.refreshLayout)
+    MaterialRefreshLayout refreshLayout;
     private ArticleDetailPresenter presenter;
     private int articleId;
 
@@ -79,7 +85,15 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
         //获取上一个界面传进来的文章id
         articleId = getIntent().getIntExtra("articleId", 0);
         //调用ArticleDetailPresenter获取数据的方法
-        presenter.loadDatas(articleId);
+//        presenter.loadDatas(articleId);
+        //一进界面就刷新一下
+        new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                refreshLayout.autoRefresh();
+            }
+        }.sendEmptyMessageDelayed(0,500);
+
     }
 
     @Override
@@ -87,6 +101,13 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
         ButterKnife.bind(this);
         //设置支持JavaScript
         webView.getSettings().setJavaScriptEnabled(true);
+        refreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
+            @Override
+            public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
+                //TODO 去重新加载数据
+                presenter.loadDatas(articleId);
+            }
+        });
     }
 
     @Override
@@ -97,6 +118,8 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
     @Override
     public void showArticleTitle(ResponseArticleTitle articleTitle) {
         Log.d("ArticleDetailActivity", "showArticleTitle:" + articleTitle.getData().getAuthor().getNickname());
+        //告诉refreshLayout刷新成功了
+        refreshLayout.finishRefresh();
         imageViewBigSubviewArticleTitle.setImageURI(articleTitle.getData().getFeaturedImageUrl());
         textViewTitleSubviewArticleTitle.setText(articleTitle.getData().getTitle());
         imageViewAuthorSubviewArticleTitle.setImageURI(articleTitle.getData().getAuthor().getAvatarUrl());
@@ -121,6 +144,7 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
         //根据评论数据动态向容器中添加View并设置View数据
         LayoutInflater inflater = LayoutInflater.from(this);
         layoutComments.setVisibility(View.VISIBLE);
+        layoutComments.removeAllViews();//不加这一行刷新的时候，评论数会一直增加
         for (int i = 0; i < comments.size(); i++) {
             View view = inflater.inflate(R.layout.list_item_comment, layoutComments, false);
             CommentItemViewHolder holder = new CommentItemViewHolder(view);
@@ -129,14 +153,14 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
             holder.textViewAuthorName.setText(comment.getUser().getNickname());
             holder.textViewCommentTimeTag.setText(comment.getCreatedAtDiffForHumans());
 
-            if (comment.getReplyToUser() == null){
+            if (comment.getReplyToUser() == null) {
                 holder.textViewComments.setText(comment.getBody());
-            }else{
+            } else {
                 String replayUserNickName = comment.getReplyToUser().getNickname();
-                holder.textViewComments.setText("回复 "+replayUserNickName+"："+comment.getBody());
+                holder.textViewComments.setText("回复 " + replayUserNickName + "：" + comment.getBody());
                 //TODO 一个TextView里面显示多种颜色的文字
             }
-            holder.textViewCommentLikeCount.setText(comment.getUpvoteCount()+"");
+            holder.textViewCommentLikeCount.setText(comment.getUpvoteCount() + "");
             layoutComments.addView(view);
         }
 
@@ -172,6 +196,11 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
     @Override
     public void showMoreCommentsView() {
         //TODO 加载更多评论
+    }
+
+    @Override
+    public void showLoadFailed() {
+        refreshLayout.finishRefresh();
     }
 
     @Override

@@ -15,11 +15,13 @@ public interface ArticleDetailModel {
     void loadArticleTitle();
     void loadArticleDetail();
     void loadComments();
-    void loadRrlatedArticles();
+    void loadRelatedArticles();
     public interface CallBack{
         void loadArticleTitleSuccess(ResponseArticleTitle articleTitle);
         void loadArticleDetailSuccess(String url);
         void loadCommentsSuccess(ResponseArticleComments responseArticleComments);
         void loadRelatedArticlesSuccess(List<ResponseRelatedArticles.DataBean.ArticlesBean> relatedArticles);
+
+        void loadFailed();
     }
 }

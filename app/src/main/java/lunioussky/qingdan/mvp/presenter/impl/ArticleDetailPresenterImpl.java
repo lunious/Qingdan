@@ -64,6 +64,11 @@ public class ArticleDetailPresenterImpl implements ArticleDetailPresenter {
             public void loadRelatedArticlesSuccess(List<ResponseRelatedArticles.DataBean.ArticlesBean> relatedArticles) {
                 view.showRelatedArticle(relatedArticles);
             }
+
+            @Override
+            public void loadFailed() {
+                view.showLoadFailed();
+            }
         });
     }
 }
