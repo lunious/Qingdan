@@ -46,4 +46,15 @@
     <item name="textView_lookup_goods" type="id" />
     <item name="imageView_big_subview_artocle_title" type="id" />
     <item name="textView_tag_subview_artocle_title" type="id" />
+    <item name="webView" type="id" />
+    <item name="layout_container_subiew_comments" type="id" />
+    <item name="textView_write_comment" type="id" />
+    <item name="layout_comments" type="id" />
+    <item name="rela_no_comments" type="id" />
+    <item name="imageView_author_avatar" type="id" />
+    <item name="textView_author_name" type="id" />
+    <item name="textView_comment_time_tag" type="id" />
+    <item name="textView_comment_like_count" type="id" />
+    <item name="imageView_comment_like" type="id" />
+    <item name="textView_comments" type="id" />
 </resources>

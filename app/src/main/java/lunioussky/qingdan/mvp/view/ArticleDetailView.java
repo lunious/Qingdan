@@ -23,4 +23,7 @@ public interface ArticleDetailView {
     void showLookUpGoods();
     void showLikedCount(int likedCount);
     void showCommentsCount(int commentsCount);
+    void showNoComments();
+
+    void showMoreCommentsView();
 }

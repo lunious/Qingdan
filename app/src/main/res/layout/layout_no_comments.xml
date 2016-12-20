@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/rela_no_comments"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:visibility="gone">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="240.0dip"
+            android:layout_height="106.0dip"
+            android:src="@drawable/bg_no_comment" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="56.0dip"
+            android:gravity="center"
+            android:text="你对这篇文章有什么想法？\n快点击下方“评论”告诉我们吧！"
+            android:textColor="@color/light_grey"
+            android:textSize="13.0sp" />
+    </LinearLayout>
+</RelativeLayout>

@@ -32,6 +32,10 @@ public class ArticleDetailPresenterImpl implements ArticleDetailPresenter {
                 view.showArticleTitle(articleTitle);
                 //通知View显示总评论个数
                 view.showCommentsCount(articleTitle.getData().getCommentCount());
+                //如果评论数大于4就显示“加载更多评论”
+                if (articleTitle.getData().getCommentCount() > 4){
+                    view.showMoreCommentsView();
+                }
                 //通知View显示喜欢的个数
                 view.showLikedCount(articleTitle.getData().getLikeCount());
 
@@ -48,7 +52,11 @@ public class ArticleDetailPresenterImpl implements ArticleDetailPresenter {
             @Override
             public void loadCommentsSuccess(ResponseArticleComments responseArticleComments) {
                 //通知View 显示评论区数据
-                view.showArticleComments(responseArticleComments.getData().getComments());
+                if (responseArticleComments.getData().getComments() == null || responseArticleComments.getData().getComments().size() == 0){
+                    view.showNoComments();
+                }else{
+                    view.showArticleComments(responseArticleComments.getData().getComments());
+                }
 
             }
 

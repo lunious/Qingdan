@@ -2,9 +2,12 @@ package lunioussky.qingdan.gui.activity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -55,6 +58,18 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
     LinearLayout layoutShared;
     @BindView(R.id.textView_lookup_goods)
     TextView textViewLookupGoods;
+    @BindView(R.id.webView)
+    WebView webView;
+    @BindView(R.id.textView_write_comment)
+    TextView textViewWriteComment;
+    @BindView(R.id.rela_no_comments)
+    RelativeLayout relaNoComments;
+    @BindView(R.id.layout_container_subiew_comments)
+    LinearLayout layoutContainerSubiewComments;
+    @BindView(R.id.textview_title_subview_title)
+    TextView textviewTitleSubviewTitle;
+    @BindView(R.id.layout_comments)
+    LinearLayout layoutComments;
     private ArticleDetailPresenter presenter;
     private int articleId;
 
@@ -69,7 +84,9 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
 
     @Override
     protected void initViews() {
-
+        ButterKnife.bind(this);
+        //设置支持JavaScript
+        webView.getSettings().setJavaScriptEnabled(true);
     }
 
     @Override
@@ -86,7 +103,7 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
         textViewAuthorNicknameSubviewArticleTitle.setText(articleTitle.getData().getAuthor().getNickname());
         textViewAuthorTagSubviewArticleTitle.setText(articleTitle.getData().getAuthor().getTagline());
         textViewPublishTimeSubviewArticleTitle.setText(articleTitle.getData().getPublishedAtDiffForHumans());
-        if (articleTitle.getData().getCategories() != null && articleTitle.getData().getCategories().size() != 0){
+        if (articleTitle.getData().getCategories() != null && articleTitle.getData().getCategories().size() != 0) {
             textViewTagSubviewArticleTitle.setText(articleTitle.getData().getCategories().get(0).getName());
         }
     }
@@ -94,12 +111,35 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
     @Override
     public void showArticleDetail(String url) {
         Log.d("ArticleDetailActivity", "showArticleDetail:" + url);
+        webView.loadUrl(url);
 
     }
 
     @Override
     public void showArticleComments(List<ResponseArticleComments.DataBean.CommentsBean> comments) {
         Log.d("ArticleDetailActivity", "showArticleComments:" + comments.size());
+        //根据评论数据动态向容器中添加View并设置View数据
+        LayoutInflater inflater = LayoutInflater.from(this);
+        layoutComments.setVisibility(View.VISIBLE);
+        for (int i = 0; i < comments.size(); i++) {
+            View view = inflater.inflate(R.layout.list_item_comment, layoutComments, false);
+            CommentItemViewHolder holder = new CommentItemViewHolder(view);
+            ResponseArticleComments.DataBean.CommentsBean comment = comments.get(i);
+            holder.imageViewAuthorAvatar.setImageURI(comment.getUser().getAvatarUrl());
+            holder.textViewAuthorName.setText(comment.getUser().getNickname());
+            holder.textViewCommentTimeTag.setText(comment.getCreatedAtDiffForHumans());
+
+            if (comment.getReplyToUser() == null){
+                holder.textViewComments.setText(comment.getBody());
+            }else{
+                String replayUserNickName = comment.getReplyToUser().getNickname();
+                holder.textViewComments.setText("回复 "+replayUserNickName+"："+comment.getBody());
+                //TODO 一个TextView里面显示多种颜色的文字
+            }
+            holder.textViewCommentLikeCount.setText(comment.getUpvoteCount()+"");
+            layoutComments.addView(view);
+        }
+
     }
 
     @Override
@@ -115,20 +155,30 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
     @Override
     public void showLikedCount(int likedCount) {
         Log.d("ArticleDetailActivity", "showLikedCount:" + likedCount);
-        textViewLikeCount.setText(getString(R.string.like_count,likedCount));
+        textViewLikeCount.setText(getString(R.string.like_count, likedCount));
     }
 
     @Override
     public void showCommentsCount(int commentsCount) {
         Log.d("ArticleDetailActivity", "showCommentsCount:" + commentsCount);
-        textViewCommentsCount.setText(getString(R.string.comments_count,commentsCount));
+        textViewCommentsCount.setText(getString(R.string.comments_count, commentsCount));
+    }
+
+    @Override
+    public void showNoComments() {
+        relaNoComments.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showMoreCommentsView() {
+        //TODO 加载更多评论
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+
     }
 
     @OnClick({R.id.imageView_back_subview_title, R.id.layout_like_count, R.id.layout_comments_count, R.id.layout_shared, R.id.textView_lookup_goods})
@@ -145,6 +195,25 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
                 break;
             case R.id.textView_lookup_goods:
                 break;
+        }
+    }
+
+    static class CommentItemViewHolder {
+        @BindView(R.id.imageView_author_avatar)
+        SimpleDraweeView imageViewAuthorAvatar;
+        @BindView(R.id.textView_author_name)
+        TextView textViewAuthorName;
+        @BindView(R.id.textView_comment_time_tag)
+        TextView textViewCommentTimeTag;
+        @BindView(R.id.textView_comment_like_count)
+        TextView textViewCommentLikeCount;
+        @BindView(R.id.imageView_comment_like)
+        ImageView imageViewCommentLike;
+        @BindView(R.id.textView_comments)
+        TextView textViewComments;
+
+        CommentItemViewHolder(View view) {
+            ButterKnife.bind(this, view);
         }
     }
 }

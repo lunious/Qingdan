@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        xmlns:fresco="http://schemas.android.com/apk/res-auto"
+        android:id="@id/imageView_author_avatar"
+        android:layout_width="34.0dip"
+        android:layout_height="34.0dip"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="12.0dip"
+        android:layout_marginTop="10.0dip"
+        fresco:roundAsCircle="true"
+        android:src="@drawable/llist_img_default_avatar" />
+
+    <TextView
+        android:id="@id/textView_author_name"
+        android:layout_width="100.0dip"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageView_author_avatar"
+        android:layout_toRightOf="@id/imageView_author_avatar"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Alice Lee"
+        android:textColor="#ff434343"
+        android:textSize="14.0sp" />
+
+    <TextView
+        android:id="@id/textView_comment_time_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_author_name"
+        android:layout_toRightOf="@id/imageView_author_avatar"
+        android:text="09/03 00:56"
+        android:textColor="#ffbfbfbf"
+        android:textSize="10.0sp" />
+
+    <TextView
+        android:id="@id/textView_comment_like_count"
+        android:layout_width="wrap_content"
+        android:layout_height="17.0dip"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/imageView_author_avatar"
+        android:ems="1"
+        android:gravity="center|left"
+        android:text="56"
+        android:textColor="#ff9b9b9b"
+        android:textSize="12.0sp" />
+
+    <ImageView
+        android:id="@id/imageView_comment_like"
+        android:layout_width="16.0dip"
+        android:layout_height="16.0dip"
+        android:layout_alignTop="@id/textView_comment_like_count"
+        android:layout_marginRight="6.0dip"
+        android:layout_toLeftOf="@id/textView_comment_like_count"
+        android:src="@drawable/thumb_up" />
+
+    <LinearLayout
+        android:layout_width="25.0dip"
+        android:layout_height="20.0dip"
+        android:layout_alignTop="@id/textView_comment_like_count"
+        android:layout_marginRight="18.0dip"
+        android:layout_toLeftOf="@id/imageView_comment_like"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="16.0dip"
+            android:layout_height="14.0dip"
+            android:src="@drawable/img_comment_reply" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@id/textView_comments"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_comment_time_tag"
+        android:layout_marginTop="6.0dip"
+        android:layout_toRightOf="@id/imageView_author_avatar"
+        android:text="This is the comments, this is the comments."
+        android:textColor="#ff606366"
+        android:textSize="13.0sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.100000024dip"
+        android:layout_below="@id/textView_comments"
+        android:layout_marginLeft="14.0dip"
+        android:layout_marginRight="14.0dip"
+        android:layout_marginTop="14.0dip"
+        android:background="#16000000" />
+</RelativeLayout>
