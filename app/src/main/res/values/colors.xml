@@ -9,4 +9,5 @@
     <color name="tabSelectedTextColor">#ff000000</color>
     <color name="tabTextColor">#ff848484</color>
     <color name="black">#000000</color>
+    <color name="light_grey">#ffcccccc</color>
 </resources>
