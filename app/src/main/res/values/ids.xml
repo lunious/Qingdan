@@ -78,4 +78,5 @@
     <item name="tv_rating_tab" type="id" />
     <item name="tv_brand_tab" type="id" />
     <item name="container" type="id" />
+    <item name="roots" type="id" />
 </resources>

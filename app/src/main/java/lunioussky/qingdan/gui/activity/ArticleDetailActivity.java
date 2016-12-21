@@ -76,6 +76,8 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
     LinearLayout layoutComments;
     @BindView(R.id.refreshLayout)
     MaterialRefreshLayout refreshLayout;
+    @BindView(R.id.roots)
+    LinearLayout roots;
     private ArticleDetailPresenter presenter;
     private int articleId;
 
@@ -87,12 +89,12 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
         //调用ArticleDetailPresenter获取数据的方法
 //        presenter.loadDatas(articleId);
         //一进界面就刷新一下
-        new Handler(){
+        new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 refreshLayout.autoRefresh();
             }
-        }.sendEmptyMessageDelayed(0,500);
+        }.sendEmptyMessageDelayed(0, 500);
 
     }
 
@@ -108,6 +110,7 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
                 presenter.loadDatas(articleId);
             }
         });
+        roots.setPadding(0,getStatusHeight(),0,0);
     }
 
     @Override

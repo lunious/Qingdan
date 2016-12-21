@@ -91,7 +91,7 @@ public class RepuationThingActivity extends BaseActivity {
             return;
         }
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if(fragment.isAdded()){//如果已经添加到Ａｃｔｉｖｉｔｙ中过来了
+        if(fragment.isAdded()){//如果已经添加到Activity中过来了
             transaction.show(fragment);
         }else{
             transaction.add(R.id.container,fragment);
