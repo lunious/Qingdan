@@ -4,4 +4,11 @@
     <string name="lookup_goods">查看商品</string>
     <string name="like_count">喜欢(%1$d)</string>
     <string name="comments_count">评论(%1$d)</string>
+    <string name="review">点评</string>
+    <string name="score_and_review">%1$s分（%2$d人点评）</string>
+    <string name="text_input_search_things">输入关键字筛选商品</string>
+    <string name="cancel">取消</string>
+    <string name="review_count">入门</string>
+    <string name="rating_score">热门</string>
+    <string name="brand_name">名称</string>
 </resources>

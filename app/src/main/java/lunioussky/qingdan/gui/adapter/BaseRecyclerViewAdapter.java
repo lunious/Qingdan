@@ -14,9 +14,17 @@ import java.util.List;
 public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private List<T> datas;
     protected LayoutInflater inflater;
+    private Context context;
+
+    public Context getContext() {
+        return context;
+    }
+
     public BaseRecyclerViewAdapter(Context context) {
+        this.context = context;
         inflater = LayoutInflater.from(context);
         datas = new ArrayList<>();
+
     }
     //新增数据
     public void addDatas(List<T> datas){

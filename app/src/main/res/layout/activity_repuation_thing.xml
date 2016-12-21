@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/colorPrimary"
+    android:id="@id/root">
+
+    <include
+        android:id="@id/include_title"
+        layout="@layout/subview_title"/>
+
+    <RelativeLayout
+        android:id="@id/top_input"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/include_title"
+        android:background="@color/white">
+
+        <EditText
+            android:id="@id/search_edit_input"
+            android:layout_width="fill_parent"
+            android:layout_height="30.0dip"
+            android:layout_marginBottom="15.0dip"
+            android:layout_marginLeft="20.0dip"
+            android:layout_marginRight="20.0dip"
+            android:layout_marginTop="15.0dip"
+            android:background="@drawable/shape_edit_bg"
+            android:ellipsize="end"
+            android:hint="@string/text_input_search_things"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="45.0dip"
+            android:singleLine="true"
+            android:textColor="#ff434343"
+            android:textSize="14.0sp" />
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_alignLeft="@id/search_edit_input"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15.0dip"
+            android:src="@drawable/search" />
+
+        <ImageView
+            android:id="@id/img_search_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/search_edit_input"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="45.0dip"
+            android:padding="5.0dip"
+            android:scaleType="centerInside"
+            android:src="@drawable/delete_icon"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@id/tv_text_search_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/search_edit_input"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5.0dip"
+            android:paddingBottom="5.0dip"
+            android:paddingLeft="5.0dip"
+            android:paddingRight="10.0dip"
+            android:paddingTop="5.0dip"
+            android:text="@string/cancel"
+            android:textColor="#ff666666"
+            android:textSize="14.0sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RadioGroup
+        android:id="@id/tab_list"
+        android:layout_width="fill_parent"
+        android:layout_height="33.0dip"
+        android:layout_below="@id/top_input"
+        android:background="#fff5f5f5"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@id/tv_review_tab"
+            android:button="@null"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="@string/review_count"
+            android:textColor="@color/color_sort_tag_selector"
+            android:checked="true"
+            android:textSize="14.0sp" />
+
+        <View
+            android:layout_width="1.0dip"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="6.0dip"
+            android:layout_marginTop="6.0dip"
+            android:background="#ffcccccc" />
+
+        <RadioButton
+            android:id="@id/tv_rating_tab"
+            android:button="@null"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="@string/rating_score"
+            android:textColor="@color/color_sort_tag_selector"
+            android:textSize="14.0sp" />
+
+        <View
+            android:layout_width="1.0dip"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="6.0dip"
+            android:layout_marginTop="6.0dip"
+            android:background="#ffcccccc" />
+
+        <RadioButton
+            android:id="@id/tv_brand_tab"
+            android:button="@null"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="@string/brand_name"
+            android:textColor="@color/color_sort_tag_selector"
+            android:textSize="14.0sp" />
+    </RadioGroup>
+
+    <FrameLayout
+        android:id="@id/container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/white"
+        android:layout_below="@id/tab_list"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>

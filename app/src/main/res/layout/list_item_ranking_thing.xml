@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@id/img_item_ranking_thing_cover"
+        xmlns:fresco="http://schemas.android.com/apk/res-auto"
+        android:layout_width="80.0dip"
+        android:layout_height="80.0dip"
+        android:layout_marginBottom="15.0dip"
+        android:layout_marginRight="10.0dip"
+        android:layout_marginTop="15.0dip"
+        android:scaleType="centerCrop"
+        fresco:placeholderImage="@drawable/loading_placeholder"
+        fresco:placeholderImageScaleType="fitCenter"
+        fresco:fadeDuration="1000"/>
+
+    <TextView
+        android:id="@id/tv_item_ranking_thing_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/img_item_ranking_thing_cover"
+        android:layout_toLeftOf="@id/ll_review"
+        android:layout_toRightOf="@id/img_item_ranking_thing_cover"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="name"
+        android:textColor="#ff9099a7"
+        android:textSize="14.0sp" />
+
+    <TextView
+        android:id="@id/tv_item_ranking_thing_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_item_ranking_thing_name"
+        android:layout_marginTop="4.0dip"
+        android:layout_toLeftOf="@id/ll_review"
+        android:layout_toRightOf="@id/img_item_ranking_thing_cover"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="title"
+        android:textColor="#ff434343"
+        android:textSize="15.0sp" />
+
+    <LinearLayout
+        android:id="@id/ll_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/img_item_ranking_thing_cover"
+        android:background="@drawable/shape_rectangle_purple_bg"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@id/img_review"
+            android:layout_width="15.0dip"
+            android:layout_height="14.0dip"
+            android:layout_marginRight="6.0dip"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_icon_write_review" />
+
+        <TextView
+            android:id="@id/tv_review_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/review"
+            android:textColor="#ff6d439b"
+            android:textSize="14.0sp" />
+    </LinearLayout>
+
+    <RatingBar
+        android:id="@id/rating_score"
+        style="@style/fiveStarRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/img_item_ranking_thing_cover"
+        android:layout_toRightOf="@id/img_item_ranking_thing_cover"
+        android:isIndicator="true" />
+
+    <TextView
+        android:id="@id/tv_score_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/rating_score"
+        android:layout_marginLeft="6.0dip"
+        android:layout_toRightOf="@id/rating_score"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="4.3分"
+        android:textColor="#ff999999"
+        android:textSize="12.0sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1.0dip"
+        android:layout_below="@id/img_item_ranking_thing_cover"
+        android:background="#ffe6e6e6" />
+</RelativeLayout>

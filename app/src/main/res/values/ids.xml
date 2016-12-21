@@ -58,4 +58,24 @@
     <item name="imageView_comment_like" type="id" />
     <item name="textView_comments" type="id" />
     <item name="refreshLayout" type="id" />
+    <item name="recycleView_ranking_thing" type="id" />
+    <item name="img_item_ranking_thing_cover" type="id" />
+    <item name="tv_item_ranking_thing_name" type="id" />
+    <item name="ll_review" type="id" />
+    <item name="tv_item_ranking_thing_title" type="id" />
+    <item name="img_review" type="id" />
+    <item name="tv_review_btn" type="id" />
+    <item name="rating_score" type="id" />
+    <item name="tv_score_num" type="id" />
+    <item name="root" type="id" />
+    <item name="include_title" type="id" />
+    <item name="top_input" type="id" />
+    <item name="search_edit_input" type="id" />
+    <item name="img_search_delete" type="id" />
+    <item name="tv_text_search_cancel" type="id" />
+    <item name="tab_list" type="id" />
+    <item name="tv_review_tab" type="id" />
+    <item name="tv_rating_tab" type="id" />
+    <item name="tv_brand_tab" type="id" />
+    <item name="container" type="id" />
 </resources>

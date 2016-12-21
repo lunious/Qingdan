@@ -1,6 +1,7 @@
 package lunioussky.qingdan.gui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import butterknife.ButterKnife;
 import lunioussky.qingdan.R;
 import lunioussky.qingdan.entity.ResponseMainListData;
 import lunioussky.qingdan.entity.ResponseReputation;
+import lunioussky.qingdan.gui.activity.RepuationThingActivity;
 
 /**
  * Created by 11645 on 2016/12/9.
@@ -72,15 +74,28 @@ public class NodesRecyclerViewAdapter extends BaseMainListRecyclerViewAdapter<Re
         return new FooterViewHolder(inflater.inflate(R.layout.subview_recycleview_loadfooter, parent, false));
     }
 
+    private List<SimpleDraweeView> simpleDraweeViews;
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (position < getHeaderCount()) {
             //TODO 去设置头部视图的数据（如果需要）
             HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
+
             if (headerViewHolder.llItemRankingEnter.getChildCount() == 0){//为了防止重复添加
                 //根据口碑数据动态向一个线性容器里面添加view
-                for (ResponseReputation.DataBean.RankingsBean ranking : rankings){
+                simpleDraweeViews = new ArrayList<>();
+                for (final ResponseReputation.DataBean.RankingsBean ranking : rankings){
                     View view = inflater.inflate(R.layout.subview_reputation,headerViewHolder.llItemRankingEnter,false);
+                    view.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v) {
+                            //跳转到RepuationThingActivity
+                            Intent intent = new Intent(getContext(), RepuationThingActivity.class);
+                            intent.putExtra(RepuationThingActivity.RANKING_ID,ranking.getId());
+                            getContext().startActivity(intent);
+                        }
+                    });
+                    simpleDraweeViews.add((SimpleDraweeView) view.findViewById(R.id.img_ranking_all_topic_enter));
                     headerViewHolder.llItemRankingEnter.addView(view);
                 }
             }
